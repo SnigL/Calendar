@@ -1,11 +1,13 @@
 package com.example.calendar;
 
-import com.example.calendar.ui.*;
-import com.vaadin.Application;
-import com.vaadin.ui.*;
-import com.vaadin.ui.Button.ClickListener;
 import java.util.Date;
 
+import com.example.calendar.ui.MenuBarNavigation;
+import com.vaadin.Application;
+import com.vaadin.ui.Button;
+import com.vaadin.ui.Button.ClickListener;
+import com.vaadin.ui.PopupDateField;
+import com.vaadin.ui.Window;
 
 public class CalendarApplication extends Application implements ClickListener {
 	private PopupDateField popupDateField;
@@ -19,10 +21,13 @@ public class CalendarApplication extends Application implements ClickListener {
 		buildMainLayout();	
 		buildMainButtons();
 		buildMainMenu();
-}
+	}
 
 	private void buildMainMenu() {
         getMainWindow().addComponent(menubar);
+		getMainWindow().addComponent(popupDateField);
+		getMainWindow().addComponent(Today);
+		getMainWindow().addComponent(Clear);
 	}
 
 	private void buildMainButtons() {
@@ -30,15 +35,12 @@ public class CalendarApplication extends Application implements ClickListener {
 		Today.addListener(this);
 		Clear = new Button("Clear");
 		Clear.addListener(this);
-		getMainWindow().addComponent(Today);
-		getMainWindow().addComponent(Clear);
 	}
 
 	private void buildMainLayout() {
 		Window mainWindow = new Window("Calendar");
 		popupDateField = new PopupDateField();
 		popupDateField.setDateFormat("yyyy-MM-dd");
-		mainWindow.addComponent(popupDateField);
 		setMainWindow(mainWindow);		
 	}
 
